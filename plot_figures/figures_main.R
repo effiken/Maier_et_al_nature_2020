@@ -1,7 +1,7 @@
 
 rm(list=ls())
 
-# set up
+# load sample metadata
 sample_annots <- read.csv('/users/andrew leader/google drive/merad/scRNAseq_analysis/sc_data_main/sample_annots.csv',
                           r=1,h=1,stringsAsFactors=F)
 

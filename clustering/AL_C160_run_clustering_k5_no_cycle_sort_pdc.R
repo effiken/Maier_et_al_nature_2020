@@ -1,7 +1,7 @@
 
 #Andrew Leader
 #AL_C160
-# cluster CITEseq samples for Barbara's paper; BM223A&B
+# cluster CITEseq samples
 
 library(methods)
 
@@ -14,12 +14,14 @@ source(paste(scClustering_dir,"clustering3.r",sep=""))
 
 amp_batches <- as.character(c(158:159))
 
+#load data structure containing count matrices
 data_l_fn <- "tmp_data_l.rd"
 
 #load gene lists
 mts <- read.csv("mt.csv",stringsAsFactors = F,h=1,r=1)$x
 cycle <- read.csv("cycle.csv",stringsAsFactors=F,h=1,r=1)$x
 
+#set gene lists for sorting out cell barcodes we're not interested in
 insilico_gating=list()
 insilico_gating$MITO=list()
 insilico_gating$MITO$genes=mts
@@ -28,7 +30,7 @@ insilico_gating$PDC=list()
 insilico_gating$PDC$genes=strsplit("Sell,Atp1b1,Fcrla,Hsd11b1,Slpi,Gm43291,Cd8b1,Cd8a,Klk1,Siglech,Cox6a2,Bst2,Rpgrip1,Ccr9,Ly6d,Ly6c2,Mzb1",",")[[1]]
 insilico_gating$PDC$interval=c(0,0.01)
 
-
+#clustering set up & function call, for execution on lsf system
 k_iter <- 5
 model_name=paste("AL_C160_no_cycle_pdc_filt",k_iter,sep="_")
 pdf(paste(model_name,".pdf",sep=""))
