@@ -1,8 +1,6 @@
 
 ## MAIER_ET_AL_NATURE_2020
 
-This repository contains scripts used for analysis and figure generation in Maier, B., Leader, A.M., Chen, S.T. et al. A conserved dendritic-cell regulatory program limits antitumour immunity. Nature 580, 257–262 (2020). https://doi.org/10.1038/s41586-020-2134-y
-
 NOTE: Clustering and analysis of associated human lung cancer dataset will be reported in partner publication Leader, et al. (in preparation as of 4/27/20). 
 
 As of 4/27/20, this repository is being adapted so that users can download and immediately reproduce all figures locally. Please bear with us, and contact andrew.leader@icahn.mssm.edu if you have any questions.
