@@ -52,11 +52,3 @@ Tested on linux LSF HPC. Due to lack of support of some of the depdendencies, th
    - [tglkmeans](https://bitbucket.org/tanaylab/tglkmeans)
    - [scDissector](https://github.com/effiken/scDissector)
 3. Downloaded and unzipped version of this repository  on a local path.
-
-### Running the scripts in R
-
-Assuming Maier_et_al_nature_2020 is the local path of the repository, the following script will run the clustering distributedly on LSF:
-
-`source("Maier_et_al_nature_2020/clustering/run_clustering_[].r")`
-
-Note: Each run of the clustering might produce slightly different results due to different random seeds.
