@@ -1,6 +1,3 @@
-
-## MAIER_ET_AL_NATURE_2020
-
 NOTE: Clustering and analysis of associated human lung cancer dataset will be reported in partner publication Leader, et al. (in preparation as of 4/27/20). 
 
 As of 4/27/20, this repository is being adapted so that users can download and immediately reproduce all figures locally. Please bear with us, and contact andrew.leader@icahn.mssm.edu if you have any questions.
