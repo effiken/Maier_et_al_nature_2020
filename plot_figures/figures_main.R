@@ -66,9 +66,16 @@ plot_s3e()
 
 source("plot_s3f.R")
 plot_s3f()
+
 ## load human
 
-hum <- new.env()
+# # to download & load human:
+# wd <- "/users/andrew leader/Downloads/"
+# download.file(url = "https://www.dropbox.com/s/y6f998phougyhib/human_dc.rd?dl=0",destfile = file.path(wd,"human_dc.rd"))
+# load(file.path(wd,"human_dc.rd"))
+
+
+
 load(envir=hum,"/users/andrew leader/google drive/merad/scRNAseq_analysis/clustering_metadata/ldm_lung_190813_dc.rd")
 
 source("plot_4a.R")
