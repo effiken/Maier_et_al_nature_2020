@@ -47,3 +47,14 @@ Tested on linux LSF HPC. Due to lack of support of some of the depdendencies, th
    - [tglkmeans](https://github.com/tanaylab/tglkmeans)
    - [scDissector](https://github.com/effiken/scDissector)
 3. Downloaded and unzipped version of this repository  on a local path.
+
+Running the scripts in R
+Assuming Maier_et_al_nature_2020 is the local path of the repository, the following script will run the clustering distributedly on LSF:
+
+source("Maier_et_al_nature_2020/scripts/clustering/run_clustering_ileum.r")
+
+Alternatively, clustering can be run locally:
+
+source("martin_et_al_cell_2019/scripts/clustering/run_clustering_ileum_local.r")
+
+Note: Each run of the clustering might produce slightly different results due to different random seeds.
