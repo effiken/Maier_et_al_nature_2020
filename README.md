@@ -44,6 +44,6 @@ Tested on linux LSF HPC. Due to lack of support of some of the depdendencies, th
    - Matrix.utils
    - gplots
    - seriation
-   - [tglkmeans](https://bitbucket.org/tanaylab/tglkmeans)
+   - [tglkmeans](https://github.com/tanaylab/tglkmeans)
    - [scDissector](https://github.com/effiken/scDissector)
 3. Downloaded and unzipped version of this repository  on a local path.
