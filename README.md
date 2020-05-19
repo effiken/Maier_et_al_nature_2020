@@ -38,6 +38,8 @@ source("figures_main.R")`
 
 ### Output
 
+The above referenced dropbox links will download automatically to a new /data/ directory.
+
 Figure will be generated in a new directory:
   - figures_out/
 
