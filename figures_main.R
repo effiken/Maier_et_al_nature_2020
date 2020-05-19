@@ -6,7 +6,7 @@ rm(list=ls())
 ############################
 #Specify a working directory. This is the path where the data will download to, and where figures will be produced.
 # It should also be the path to the scripts from the github.
-wd <- "/users/andrew leader/Downloads/Maier_et_al_dir"
+wd <- getwd()
 ############################
 
 setwd(wd)
