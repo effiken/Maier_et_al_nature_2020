@@ -13,6 +13,13 @@ human DC scRNA & CITEseq data: https://www.dropbox.com/s/e0cvefqzoy4hz0r/human_d
 
 These links will download R data structures, the components of which contain the count matrices and cell metadata.
 
+For the human DC dataset, the data structure is called "human_dc" and has the following components:
+	- filtered_umitab is the counts table
+	- cell_to_tissue, cell_to_sample, cell_to_annot, cell_to_patient are arrays with metadata identifying the tissue, sample, and patient of origin as well as our annotation (cDC1, cDC2, mregDC)
+	- filtered_ds is a downsampled matrix, where we have randomly drawn 2000 UMI from each cell containing at least that many. We use this sampling of UMI as a normalization for visualization that doesn't cause artifacts.
+	- adt_matrix_by_sample is a list of CITEseq ADT matrices for the samples that had CITEseq. We recommend within-patient normalization for analyses.
+
+
 ## Making the figures
 ### Requirements
 
