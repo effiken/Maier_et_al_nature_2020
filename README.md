@@ -20,13 +20,13 @@ Tested on Windows 10
 
 1. R
 2. R packages: 
-	-gplots
-	-Matrix.utils
-	-mixtools
-	-seriation
-	-sp
-	-scales
-	-[scDissector](https://github.com/effiken/scDissector)
+	- gplots
+	- Matrix.utils
+	- mixtools
+	- seriation
+	- sp
+	- scales
+	- [scDissector](https://github.com/effiken/scDissector)
 
 3. Downloaded and unzipped version of this repository  on a local path.
 
