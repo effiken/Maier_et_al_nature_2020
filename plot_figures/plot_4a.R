@@ -5,35 +5,30 @@ plot_4a <- function(){
 clust2annot <- c("mregDC","DC1","DC2")
 names(clust2annot) <- c("41","45","14")
 
-cells <- colnames(hum$ldm$dataset$umitab)[
-  hum$ldm$dataset$cell_to_cluster%in%names(clust2annot)&
-    colnames(hum$ldm$dataset$umitab)%in%colnames(hum$ldm$dataset$ds[[2]])
-]
-cells <- split(cells,hum$ldm$dataset$cell_to_cluster[cells])
+cells <- colnames(human_dc$filtered_umitab)[colnames(human_dc$filtered_umitab)%in%colnames(human_dc$filtered_ds)]
+cells <- split(cells,human_dc$cell_to_annot[cells])
 cells <- unlist(lapply(cells,function(x){sample(x,min(unlist(lapply(cells,length))))}))
-
-cell_to_tissue <- sample_annots[hum$ldm$dataset$cell_to_sample[cells],]$tissue
+cell_to_tissue <- human_dc$cell_to_tissue[cells]
 names(cell_to_tissue) <- cells
+cells <- cells[order(factor(human_dc$cell_to_annot[cells],c("mregDC","DC1","DC2")),factor(cell_to_tissue[cells],c("Normal","Tumor")))]
 
-cells <- cells[order(factor(hum$ldm$dataset$cell_to_cluster[cells],names(clust2annot)),
-                     factor(cell_to_tissue[cells],c("Normal","Tumor")))]
 
 lin_col <- rgb(t(col2rgb(c(7,4,5)))*.7,max=255)
 
-breaks <- which(!diff(as.numeric(hum$ldm$dataset$cell_to_cluster[cells]))==0)/length(cells)
+breaks <- which(!diff(as.numeric(factor(human_dc$cell_to_annot[cells])))==0)/length(cells)
 
 
 genes <- rev(strsplit("MARCKSL1,CD80,TRAF1,RELB,CCL22,BIRC2,IL12B,ENO3,LAMP3,MARCKS,FSCN1,CD274,PDCD1LG2,CD200,FAS,SOCS2,CCL17,IL4I1,CCL19,BIRC3,CCR7,IDO1,NAAA,C1orf54,DNASE1L3,CLEC9A,XCR1,IRF8,IRF4,SIRPA,CD1C,CD1E,FCER1A,FCGR2B,CLEC10A",",")[[1]])
 
-mat <- log2(1+hum$ldm$dataset$ds[[2]][genes,cells])
+mat <- log2(1+human_dc$filtered_ds[genes,cells])
 
 mat[mat > 4] <- 4
 
 s <- seq(1,0,-.02)
-cell2annot <- clust2annot[hum$ldm$dataset$cell_to_cluster[cells]]
+cell2annot <- human_dc$cell_to_annot[cells]
 
 
-pdf("fig_4a.pdf",height=3.74,width=2.55,pointsize = 12,compress=FALSE)
+pdf(file.path(figure_dir,"fig_4a.pdf"),height=3.74,width=2.55,pointsize = 12,compress=FALSE)
 #png("fig_4a.png",height=3.74,width=2.55,units="in",res=1000)
 layout(matrix(1:3,nrow=3),heights=c(.5,10,.5))
 par(mar=c(0,0,0,0),oma=c(2,5,2,2))

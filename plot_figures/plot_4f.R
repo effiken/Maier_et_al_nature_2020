@@ -1,8 +1,4 @@
 plot_4f <- function(){
-  
-
-clustering_dir <- "/users/andrew leader/Documents/GitHub/scClustering/"
-source(file.path(clustering_dir,"clustering3.r"))
 
 #get hvg across DCs in each species
 mus_mask <- colnames(ldm$dataset$umitab)[ldm$dataset$cell_to_cluster%in%c("5","4","3") & ldm$dataset$cell_to_sample%in%c("KP","Naive")]
@@ -10,21 +6,20 @@ mus_mask <- intersect(mus_mask,colnames(ldm$dataset$ds[[4]]))
 hvg_mus <- get_highly_variable_genes(ds = ldm$dataset$ds[[4]][,mus_mask],
                                      seeding_genes = rownames(ldm$dataset$ds[[4]]),
                                      min_umis_per_var_gene = 300,varmean_quantile=.8)
-hum_mask <- colnames(hum$ldm$dataset$umitab)[
-  hum$ldm$dataset$cell_to_cluster%in%c("41","45","14")]
-hum_mask <- intersect(hum_mask,colnames(hum$ldm$dataset$ds[[2]]))
-hvg_hum <- get_highly_variable_genes(ds=hum$ldm$dataset$ds[[2]][,hum_mask],
-                                     seeding_genes = rownames(hum$ldm$dataset$ds[[2]]),
+
+hum_mask <- colnames(human_dc$filtered_ds)
+hvg_hum <- get_highly_variable_genes(ds=human_dc$filtered_ds,
+                                     seeding_genes = rownames(human_dc$filtered_ds),
                                      min_umis_per_var_gene = 300,varmean_quantile=.8)
+
 
 overlap <- intersect(hvg_hum,toupper(hvg_mus))
 
 #generate avg human signatures
-s <- split(colnames(hum$ldm$dataset$umitab),hum$ldm$dataset$cell_to_cluster)
-exprs <- lapply(s,function(x){rs <- rowSums(hum$ldm$dataset$umitab[,x]); return(rs/sum(rs))})
+s <- split(colnames(human_dc$filtered_umitab),human_dc$cell_to_annot)
+exprs <- lapply(s,function(x){rs <- rowSums(human_dc$filtered_umitab[,x]); return(rs/sum(rs))})
 exprs <- do.call(cbind,exprs)
-exprs <- exprs[,c("41","45","14")]
-colnames(exprs) <- c("mDC","DC1","DC2")
+exprs <- exprs[,c("mregDC","DC1","DC2")]
 
 reg <- 1e-4
 exprs <- log2((exprs+reg)/rowMeans(exprs+reg))
@@ -67,8 +62,7 @@ gene_ord <- diff_ord[order(factor(genes_k$cluster[diff_ord],c("4","2","1","3","5
 
 
 
-pdf("fig4f.pdf",width=6.63,height=2.37)
-#png("fig4f.png",width = 6.63,height=2.37,units="in",res=300)
+pdf(file.path(figure_dir,"fig4f.pdf"),width=6.63,height=2.37)
 layout(matrix(1:9,nrow=3),widths=c(2,7,1.7),heights=c(1,.25,4))
 
 par(mar=c(0,0,0,0),oma=c(4,4,.1,.1))
@@ -77,7 +71,6 @@ par(mar=c(0,0,0,0),oma=c(4,4,.1,.1))
 plot.new()
 plot.new()
 par(mar=c(0,0,0,6.5))
-#plot(as.dendrogram(samp_h),horiz=TRUE,xlab="sqrt((1-cor)/2)",type="triangle",yaxs="i",axes=F,cex.labels=.5)
 plot(as.dendrogram(samp_h),horiz=TRUE,xlab="sqrt((1-cor)/2)",type="triangle",yaxs="i",axes=F,leaflab="none")
 axis(side=1,at=c(0,.5,1),cex.axis=0.6,xpd="",mgp=c(1.5,.5,0))
 title(xlab=expression("(1-"*italic("cor")*")/2"),cex=.5,xpd="",line=1.5)
@@ -105,7 +98,6 @@ mtext(c(expression("mregDC"[italic("H. sap.")]),expression("mregDC"[italic("M. m
       expression("DC2"[italic("H. sap.")]),expression("DC2"[italic("M. mus.")])),side=2,las=2,at=seq(0,1,1/(5)),cex=.75,adj=.5,line=3)
 
 
-#col3
 plot.new()
 plot.new()
 
@@ -119,8 +111,6 @@ mtext("Log2(Expression\n/Species Avg)",side=3,cex=.7,line=.5)
 
 dev.off()
 
-# write.csv(cross_species_mat,"cross_species_mat_190430.csv")
-# write.csv(genes_k$cluster,"kmeans_clusters_190430.csv")
 
 
 }

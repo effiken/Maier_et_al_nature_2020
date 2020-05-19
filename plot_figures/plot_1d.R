@@ -14,13 +14,13 @@ total_avg <- rs/sum(rs)
 reg <- 1e-6
 l2fc <- log2((mdc_avg+reg)/(rest_avg+reg))
 
-miller <- read.csv("/users/andrew leader/Dropbox/merad_lab_analyses/AL/AL_C126_mDC_mouse_DEGs/miller.csv")
+miller <- read.csv(file.path(wd,"additional_input_data/miller.csv"))
 miller_up <- miller$ï..miller_up
 miller_down <- miller$miller_down
 miller_up <- intersect(miller_up,names(l2fc))
 miller_down <- intersect(miller_down,names(l2fc)) 
 
-png("fig1d.png",height=1.96,width=2.11,units="in",res=1000,pointsize=6)
+png(file.path(figure_dir,"fig1d.png"),height=1.96,width=2.11,units="in",res=1000,pointsize=6)
 par(oma=c(0,0,0,1))
 plot(log10(total_avg+reg),l2fc,
      bty="n",

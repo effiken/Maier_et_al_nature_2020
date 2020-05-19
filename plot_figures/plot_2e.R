@@ -6,15 +6,15 @@ library(scales)
 plot_2e <- function(){
 
 
-sort_expt1 <- read.csv("/users/andrew leader/Dropbox/merad_lab_analyses/AL/AL_C026/voom_exprs.csv",r=1,h=1,stringsAsFactors = F)
+sort_expt1 <- read.csv(file.path(wd,"additional_input_data/voom_exprs.csv"),r=1,h=1,stringsAsFactors = F)
 
-if(!"DE_mregDC_vs_DC1_20k.csv"%in%list.files()){
+if(!"DE_mregDC_vs_DC1_20k.csv"%in%list.files(file.path(wd,"DE_results/"))){
   mask_fg <- colnames(ldm$dataset$umitab)[ldm$dataset$cell_to_sample%in%c("Naive","KP") & ldm$dataset$cell_to_cluster%in%c("5")]
   mask_bg <- colnames(ldm$dataset$umitab)[ldm$dataset$cell_to_sample%in%c("Naive","KP") & ldm$dataset$cell_to_cluster%in%c("4")]
   DE <- DE_between_two_sets(ldm,mask_bg,mask_fg,1,3,1e-6,20,1000)
-  write.csv(DE,"DE_mregDC_vs_DC1_20k.csv")
+  write.csv(DE,file.path(wd,"DE_results/DE_mregDC_vs_DC1_20k.csv"))
 }else{
-  DE <- read.csv("DE_mregDC_vs_DC1_20k.csv",r=1,h=1,stringsAsFactors = F)
+  DE <- read.csv(file.path(wd,"DE_results/DE_mregDC_vs_DC1_20k.csv"),r=1,h=1,stringsAsFactors = F)
 }
 
 mdc_avg <- rowSums(ldm$dataset$umitab[,ldm$dataset$cell_to_sample%in%c("KP","naive") & ldm$dataset$cell_to_cluster=="5"])
@@ -45,7 +45,7 @@ genes <- intersect(genes,overlap)
 genes_select <- c("Fscn1","Il12b","Ccr7","Cd274","Cd40","Ccl22","Fas","Il4ra","Ccl17","Pdcd1lg2")
 
 
-png("fig2e.png",height=5,width=2.2,units="in",pointsize = 7,res=1000)
+png(file.path(figure_dir,"fig2e.png"),height=5,width=2.2,units="in",pointsize = 7,res=1000)
 par(oma=c(1,0,0,0),mfrow=c(2,1))
 
 for(iter in 1:2){

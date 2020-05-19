@@ -2,13 +2,13 @@
 plot_s2i <- function(){
 
 
-if(!"DE_mreg_KPvsNaive_10k.csv"%in%list.files()){
+if(!"DE_mreg_KPvsNaive_10k.csv"%in%list.files(file.path(wd,"DE_results/"))){
   mask_fg <- colnames(ldm$dataset$umitab)[ldm$dataset$cell_to_sample=="KP" & ldm$dataset$cell_to_cluster%in%c("5")]
   mask_bg <- colnames(ldm$dataset$umitab)[ldm$dataset$cell_to_sample=="Naive" & ldm$dataset$cell_to_cluster%in%c("5")]
   DE <- DE_between_two_sets(ldm,mask_bg,mask_fg,1,3,1e-6,10,1000)
-  write.csv(DE,"DE_mreg_KPvsNaive_10k.csv")
+  write.csv(DE,file.path(wd,"DE_results/DE_mreg_KPvsNaive_10k.csv"))
 }else{
-  DE <- read.csv("DE_mreg_KPvsNaive_10k.csv",r=1,h=1,stringsAsFactors = F)
+  DE <- read.csv(file.path(wd,"DE_results/DE_mreg_KPvsNaive_10k.csv"),r=1,h=1,stringsAsFactors = F)
 }
 
 genes <- strsplit("Ciita,Pdcd1lg2,Il4ra,Cd274,Il12b",",")[[1]]
@@ -27,7 +27,7 @@ rs_rdc <- rs_rdc/sum(rs_rdc)
 l2fc <- log2((1e-6+rs_mdc)/(1e-6+rs_rdc))
 l2fc <- l2fc[names(m)]
 
-png("fig_S2i.png",width=2.645,height=4.2,units="in",res=300,pointsize=8)
+png(file.path(figure_dir,"fig_S2i.png"),width=2.645,height=4.2,units="in",res=300,pointsize=8)
 par(mfrow=c(2,1))
 
 for(iter in 1:2){

@@ -18,7 +18,7 @@ cells <- names(ldm$dataset$cell_to_cluster)[
 adt_mat <- adt_mat[,cells]
 
 
-png("fig1f.png",height=2.16,width=4.52,units="in",res=300)
+png(file.path(figure_dir,"fig1f.png"),height=2.16,width=4.52,units="in",res=300)
 layout(matrix(1:3,nrow=1))
 
 par(oma=c(0,0,0,0),mar=c(5,2.5,5,1),cex.axis=.5,mgp=c(1,.25,0),tcl=-.15,cex=.5)
@@ -79,7 +79,7 @@ tumor_gated_type[which(as.logical(point.in.polygon(log2(1+adt_mat["CD103",which(
                                                    log2(1+adt_mat["CD11b",which(plot_mask)]),
                                                    DC2_gate$x, DC2_gate$y)))] <- "DC2"
 names(tumor_gated_type) <- colnames(adt_mat)[plot_mask]
-write.csv(tumor_gated_type,"/users/andrew leader/Dropbox/Andrew&Barbara/figure_R_scripts/fig1/mDC_gating_KP_190424.csv")
+write.csv(tumor_gated_type,"DE_results/mDC_gating_KP_190424.csv")
 
 gated_type <- cbind(table(naive_gated_type),table(tumor_gated_type))
 gated_type <- t(gated_type)/rowSums(t(gated_type))

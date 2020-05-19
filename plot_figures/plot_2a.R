@@ -12,7 +12,7 @@ exprs <- lapply(s,function(x){rs <- rowSums(ldm$dataset$umitab[,x]); return(rs/s
 exprs <- do.call(cbind,exprs)
 
 reg <- 1e-6
-png("Fig2a.png",height=1.91,width=1.91,units="in",res=600,pointsize = 6)
+png(file.path(figure_dir,"Fig2a.png"),height=1.91,width=1.91,units="in",res=600,pointsize = 6)
 #par(mar=c(2,2,2,2))
 plot(log10(reg+exprs[,"5.Naive"]),log10(reg+exprs[,"5.Naive_CCR7KO"]),bty="L",pch=".",xlab="",ylab="",col=alpha("black",.3))
 title(xlab=expression("Log"[10]*"(mregDC"["WT"]*" Expression)"))

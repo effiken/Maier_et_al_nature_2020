@@ -20,7 +20,7 @@ colnames(mat_avg) <- annots[match(colnames(mat_avg),annots$node),"parent"]
 
 mat_avg <- mat_avg[,c("mregDC","DC1","DC2")]
 
-pdf("fig1c.pdf",width=7.07,height=1.35,pointsize=12)
+pdf(file.path(figure_dir,"fig1c.pdf"),width=7.07,height=1.35,pointsize=12)
 #png("fig1c.png",res=300,width=7.07,height=1.35,units="in")
 layout(matrix(c(1:length(pathways),array(length(pathways)+1,length(pathways))),byrow=T,ncol=length(pathways)),heights=c(4,1))
 par(oma=c(0,0,0,0),mar=c(2,2,1.5,2))

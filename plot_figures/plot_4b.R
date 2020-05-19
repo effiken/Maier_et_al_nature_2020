@@ -1,12 +1,12 @@
 
 plot_4b <- function(){
-s <- split(colnames(hum$ldm$dataset$umitab),hum$ldm$dataset$cell_to_cluster)
+s <- split(colnames(human_dc$filtered_umitab),human_dc$cell_to_annot)
 exprs <- lapply(s,function(x){
-  rs <- rowSums(hum$ldm$dataset$umitab[,x]);
+  rs <- rowSums(human_dc$filtered_umitab[,x]);
   return(rs/sum(rs))
 })
 exprs <- do.call(cbind,exprs)
-exprs <- exprs[,c("41","45","14")]
+exprs <- exprs[,c("mregDC","DC1","DC2")]
 
 
 
@@ -19,7 +19,7 @@ pathways$'Th2 response' <- strsplit("Bcl2l1,Stat6,Tnfrsf4,Ccl22,Ccl17,Il4i1,Il4r
 
 pathways <- lapply(pathways,toupper)
 
-pdf("fig4b.pdf",width=7.07,height=1.35)
+pdf(file.path(figure_dir,"fig4b.pdf"),width=7.07,height=1.35)
 #png("fig4b.png",res=1000,width=7.07,height=1.35,units="in")
 layout(matrix(c(1:length(pathways),array(length(pathways)+1,length(pathways))),byrow=T,ncol=length(pathways)),heights=c(4,1))
 par(oma=c(0,0,0,0),mar=c(2,2,1.5,2))

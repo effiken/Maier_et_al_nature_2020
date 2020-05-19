@@ -16,7 +16,7 @@ colnames(mat) <- c("mregDC","DC1","DC2")
 mat <- log10(1e-6+mat[rev(c("Axl","Tyro3","Mertk")),])
 
 s <- seq(0,1,1/50)
-png("figS3e.png",height=1.88,width = 2.35,units="in",res=1000,pointsize=8)
+png(file.path(figure_dir,"figS3e.png"),height=1.88,width = 2.35,units="in",res=1000,pointsize=8)
 par(oma=c(0,0,0,1))
 layout(matrix(c(1,2),nrow=1),widths=c(5,1))
 #par(mar=c(5,4,10,1))

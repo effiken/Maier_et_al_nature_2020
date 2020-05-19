@@ -37,7 +37,7 @@ cell2sample <- ldm$dataset$cell_to_sample[colnames(mat)]
 
 
 #RNA truthplot
-png("fig_s1a.png",height=2.36,width=3.24,units="in",res=1000)
+png(file.path(figure_dir,"fig_s1a.png"),height=2.36,width=3.24,units="in",res=1000)
 layout(matrix(1:6,nrow=3,ncol=2),widths=c(10,4),heights=c(.5,10,.5))
 
 par(oma=c(1,5,1.5,.1))

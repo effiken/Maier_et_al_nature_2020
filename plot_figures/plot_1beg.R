@@ -24,7 +24,7 @@ lin_col <- rgb(t(col2rgb(c(7,4,5)))*.7,max=255)
 
 
 #RNA truthplot
-png("fig1b.png",height=3.18,width=2.53,units="in",res=1000)
+png(file.path(figure_dir,"fig1b.png"),height=3.18,width=2.53,units="in",res=1000)
 layout(matrix(1:6,nrow=3,ncol=2),widths=c(10,4),heights=c(.5,10,.5))
 
 par(oma=c(1,5,1.5,.1))
@@ -68,7 +68,7 @@ legend(x = 0,y=2,legend = c("Naive","KP"),fill = c(rgb(255,192,203,max=255),rgb(
 dev.off()
 
 #CITEseq dot plot
-pdf("fig1e.pdf",height=2.21,width=3.78,pointsize = 12)
+pdf(file.path(figure_dir,"fig1e.pdf"),height=2.21,width=3.78,pointsize = 12)
 #png("fig1e.png",height=2.21,width=3.78,units="in",res=3000)
 layout(matrix(1:5,nrow=5),heights=c(array(1,5)))
 
@@ -108,7 +108,7 @@ adt_mat <- adt_mat[,ldm$dataset$cell_to_sample[colnames(adt_mat)]%in%c("Naive","
 lin_col <- rgb(t(col2rgb(c(7,4,5))*.7),max=255)
 names(lin_col) <- annots$node[1:3]
 
-png("fig1g.png",height=2.5,width=3,units="in",res=300,pointsize=8)
+png(file.path(figure_dir,"fig1g.png"),height=2.5,width=3,units="in",res=300,pointsize=8)
 par(oma=c(0,0,0,0),mar=c(5,2.5,5,1),cex.axis=.5,mgp=c(1,.25,0),tcl=-.15,cex=.5)
 
 layout(matrix(1:2,nrow=1))

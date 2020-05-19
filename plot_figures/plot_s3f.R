@@ -2,8 +2,8 @@
 
 plot_s3f=function(){
   
-if("figS2b_DE_WT_10k.csv"%in%list.files()){
-  DE <- read.csv("figS2b_DE_WT_10k.csv",r=1,h=1,stringsAsFactors = F)
+if("figS2b_DE_WT_10k.csv"%in%list.files(file.path(wd,"DE_results/"))){
+  DE <- read.csv(file.path(wd,"DE_results/figS2b_DE_WT_10k.csv"),r=1,h=1,stringsAsFactors = F)
 }else{
   error("Need to run fig S2b first")
 }
@@ -33,7 +33,7 @@ l2fc <- l2fc[names(m)]
 sig <- c(sig_genes_up,sig_genes_down)
 not_sig <- names(m)[!names(m)%in%sig]
 
-png("figS3f.png",width=2.645,height=4.6,units="in",res=1000,pointsize=8)
+png(file.path(figure_dir,"figS3f.png"),width=2.645,height=4.6,units="in",res=1000,pointsize=8)
 par(mfrow=c(2,1))
 
 for(iter in 1:2){

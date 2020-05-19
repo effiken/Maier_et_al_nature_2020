@@ -4,8 +4,7 @@ plot_1h = function(){
 
 #mreg_gated <- read.csv("mDC_gating_naive_190424.csv",r=1)
 
-source("/users/andrew leader/Documents/GitHub/scClustering/DE.r")
-  if(!"mregDC1v2_DE_40k.csv"%in%list.files()){
+if(!"mregDC1v2_DE_40k.csv"%in%list.files(file.path(wd,"DE_results/"))){
     
 #mreg_gated generated from plotting fig 1f
     if(!exists("mreg_gated")){
@@ -18,11 +17,14 @@ mask_fg <- names(mreg_gated)[mreg_gated=="DC1"]
 # mask_fg <- sample(mask_fg,pmin(length(mask_bg),length(mask_fg)))
   DE <- DE_between_two_sets(ldm,mask_bg = mask_bg,
                             mask_fg=mask_fg,nmin_umi_thresh = 0,nmin_cells_with_min_umi = 5,nchunks = 20,n_per_chunk = 2000,reg=1e-7)
-  write.csv(DE,"mregDC1v2_DE_40k.csv")
+  write.csv(DE,file.path(wd,"DE_results/mregDC1v2_DE_40k.csv"))
 }else{
-  DE <- read.csv("mregDC1v2_DE_40k.csv",r=1,h=1,stringsAsFactors = F)
+  DE <- read.csv(file.path(wd,"DE_results/mregDC1v2_DE_40k.csv"),r=1,h=1,stringsAsFactors = F)
 }
 
+mask_bg <- names(mreg_gated)[mreg_gated=="DC2"]
+mask_fg <- names(mreg_gated)[mreg_gated=="DC1"]
+  
 genes <- strsplit("Il12b,Ccl17,Irf8,Fcer1g,Cst3,Xcr1,Sirpa,Cadm1,Ccl22,Tap1,Il4ra",",")[[1]]
 sig_genes_up <- rownames(DE)[DE$adj.p.value<0.15 & DE$log2_FC>0]
 sig_genes_down <- rownames(DE)[DE$adj.p.value<0.15 & DE$log2_FC<0]
@@ -37,7 +39,7 @@ m_DC1 <- rsDC1/sum(rsDC1)
 m_DC2 <- rsDC2/sum(rsDC2)
 l2fc <- log2((m_DC1+reg)/(m_DC2+reg))
 
-png("fig1h.png",width=2.645,height=4.2,units="in",res=300)
+png(file.path(figure_dir,"fig1h.png"),width=2.645,height=4.2,units="in",res=300)
 par(mfrow=c(2,1),oma=c(0,0,0,0),mar=c(2,2,2,.5))
 
 for(iter in 1:2){
